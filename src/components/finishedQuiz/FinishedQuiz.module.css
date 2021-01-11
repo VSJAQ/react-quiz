@@ -1,0 +1,24 @@
+.finishedQuiz {
+    padding: 20px;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    margin: 0 10px;
+    box-sizing: border-box;
+}
+
+.finishedQuiz ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.finishedQuiz .error {
+    color: rgba(240, 87, 108, 0.7);
+    margin-left: 10px;
+}
+
+.finishedQuiz .success {
+    color: rgba(161, 240, 69, 0.7);
+    margin-left: 10px;
+}
