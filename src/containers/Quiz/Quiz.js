@@ -35,6 +35,11 @@ export class Quiz extends Component {
     results: {}
   }
 
+  isQuizFinished = () => {
+    return this.state.activeQuestion + 1 === this.state.quiz.length
+  }
+
+
   answerClickHandler = (answerId) => {
     const currentQuizItem = this.state.quiz[this.state.activeQuestion]
     const results = this.state.results
@@ -45,13 +50,12 @@ export class Quiz extends Component {
         return
       }
     }
-    debugger
     if (answerId === currentQuizItem.correctAnswer) {
       if (!results[currentQuizItem.id]) {
         results[currentQuizItem.id] = 'success'
       }
       this.setState({
-        answerState: {[currentQuizItem.answers.id]: 'success'},
+        answerState: {[answerId]: 'success'},
         results
       })
         const showingAnswerTimeout = window.setTimeout(() => {
@@ -70,14 +74,19 @@ export class Quiz extends Component {
     } else {
       results[currentQuizItem.id] = 'error'
       this.setState({
-        answerState: {[currentQuizItem.answers.id]: 'error'},
+        answerState: {[answerId]: 'error'},
         results
       })
     }
   }
 
-  isQuizFinished = () => {
-    return this.state.activeQuestion + 1 === this.state.quiz.length
+  restartClickHandler = () => {
+    this.setState({
+      activeQuestion: 0,
+      answerState: null,
+      isQuizFinished: false,
+      results: {},
+    })
   }
 
   render() {
@@ -89,6 +98,7 @@ export class Quiz extends Component {
             this.state.isQuizFinished
               ? <FinishedQuiz quizItems={this.state.quiz}
                               results={this.state.results}
+                              onRestartBtnClick={this.restartClickHandler}
               />
               : <ActiveQuiz answers={this.state.quiz[this.state.activeQuestion].answers}
                           question={this.state.quiz[this.state.activeQuestion].question}
