@@ -15,10 +15,16 @@ class Layout extends Component {
     })
   }
 
+  onClose = () => {
+    this.setState({
+      isOpen: false
+    })
+  }
+
   render() {
     return (
       <div className={styles.Layout}>
-        <Drawer isOpen={this.state.isOpen}/>
+        <Drawer isOpen={this.state.isOpen} onClose={this.onClose}/>
         <MenuToggle
           onToggle={this.toggleMenuHandler}
           isOpen={this.state.isOpen}
